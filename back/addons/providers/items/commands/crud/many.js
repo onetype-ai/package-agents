@@ -31,7 +31,6 @@ commands.Item({
 			id: provider.Get('id'),
 			name: provider.Get('name'),
 			description: provider.Get('description'),
-			dialect: provider.Get('dialect'),
 			endpoint: provider.Get('endpoint'),
 			models: provider.Get('models') || []
 		}));

@@ -21,11 +21,16 @@ onetype.AddonReady('agents', (agents) =>
 			description: 'One line about the provider.'
 		});
 
-		addon.Field('dialect', {
-			type: 'string',
+		addon.Field('send', {
+			type: 'function',
 			required: true,
-			options: ['anthropic', 'openai'],
-			description: 'Which API dialect the endpoint speaks.'
+			description: 'Turns the standardized request { endpoint, key, model, system, messages, tools } into { url, headers, body } for the API.'
+		});
+
+		addon.Field('receive', {
+			type: 'function',
+			required: true,
+			description: 'Turns the raw API response into the standardized { text, calls, stop, usage } shape.'
 		});
 
 		addon.Field('endpoint', {

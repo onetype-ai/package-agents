@@ -13,10 +13,6 @@ onetype.DataSchema('agents.provider', {
 		type: 'string',
 		description: 'One line about the provider.'
 	},
-	dialect: {
-		type: 'string',
-		description: 'Which API dialect the endpoint speaks, anthropic or openai.'
-	},
 	endpoint: {
 		type: 'string',
 		description: 'Default base URL of the API.'
