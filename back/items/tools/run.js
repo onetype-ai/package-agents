@@ -28,15 +28,28 @@ onetype.AddonReady('agents.tools', (tools) =>
 		callback: async function(input)
 		{
 			const chain = this._agents || [];
+			const caller = chain[chain.length - 1] || null;
+
+			const target = agents.ItemGet(input.agent);
+
+			if(!target)
+			{
+				return 'Agent ' + input.agent + ' is not registered.';
+			}
+
+			if(target.Get('isHidden') || (target.Get('parent') || null) !== caller)
+			{
+				return 'Agent ' + input.agent + ' is not one of yours to run.';
+			}
 
 			if(chain.includes(input.agent))
 			{
-				return 'Agent ' + input.agent + ' is already running in this chain — do not call it again.';
+				return 'Agent ' + input.agent + ' is already running in this chain, do not call it again.';
 			}
 
 			if(chain.length >= 4)
 			{
-				return 'The delegation chain is too deep — solve this yourself or report back.';
+				return 'The delegation chain is too deep, solve this yourself or report back.';
 			}
 
 			const result = await agents.Fn('run', {
