@@ -1,4 +1,5 @@
 import onetype from '@onetype/framework';
+import agents from '#agents/addon.js';
 
 onetype.AddonReady('agents.tools', (tools) =>
 {
@@ -24,9 +25,28 @@ onetype.AddonReady('agents.tools', (tools) =>
 				description: 'The question or the instructions, with all context the agent needs.'
 			}
 		},
-		callback: function()
+		callback: async function(input)
 		{
-			return 'Running agents is not wired yet — tell the user the delegation layer is still being built.';
+			const chain = this._agents || [];
+
+			if(chain.includes(input.agent))
+			{
+				return 'Agent ' + input.agent + ' is already running in this chain — do not call it again.';
+			}
+
+			if(chain.length >= 4)
+			{
+				return 'The delegation chain is too deep — solve this yourself or report back.';
+			}
+
+			const result = await agents.Fn('run', {
+				agent: input.agent,
+				mode: input.mode === 'research' ? 'research' : 'task',
+				messages: [{ role: 'user', text: input.input }],
+				context: this
+			});
+
+			return result.text || 'The agent finished without a reply.';
 		}
 	});
 });

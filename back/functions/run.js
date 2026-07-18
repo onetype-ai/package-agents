@@ -24,6 +24,8 @@ agents.Fn('run', async function({ agent, mode = 'task', messages = [], context =
 		task: 'You are executing a task. Use your tools to complete it, then reply with a short report of what was done.'
 	};
 
+	context = Object.assign(Object.create(context), { _agents: [...(context._agents || []), agent] });
+
 	const system = [item.Get('instructions') || '', framings[mode] || framings.task].filter(Boolean).join('\n\n');
 	const tools = this.tools.Fn('for', item).map((tool) => this.tools.Fn('definition', tool));
 	const steps = [];
@@ -65,6 +67,7 @@ agents.Fn('run', async function({ agent, mode = 'task', messages = [], context =
 			output = typeof output === 'string' ? output : JSON.stringify(output ?? null);
 
 			steps.push({ tool: call.name, input: call.input, output });
+			context._trace && context._trace.push({ agent, tool: call.name, input: call.input, output });
 			messages.push({ role: 'tool', id: call.id, output });
 		}
 	}
