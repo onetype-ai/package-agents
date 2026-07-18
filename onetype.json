@@ -1,0 +1,18 @@
+{
+	"type": "package",
+	"slug": "onetype/orchestration",
+	"name": "Orchestration",
+	"version": "0.1.0",
+	"description": "The agentic engine of the instance. Agents, tools and runs — packages declare what their agents can do, consumers hand them research questions and tasks, every run is recorded step by step.",
+	"icon": "hub",
+	"color": "rgba(56, 189, 248, 1)",
+	"core": ">=0.1.0",
+	"status": "enabled",
+	"depends": [
+		"onetype/vault"
+	],
+	"permissions": [],
+	"limits": {},
+	"features": {},
+	"config": {}
+}

@@ -1,0 +1,20 @@
+import onetype from '@onetype/framework';
+
+onetype.EmitRegister('orchestration.runs.step', {
+	description: 'Fires after every tool call inside a run, with the step that was added.',
+	metadata: { addon: 'orchestration.runs' },
+	config: {
+		id: {
+			type: 'string',
+			description: 'Run id.'
+		},
+		agent: {
+			type: 'string',
+			description: 'Agent the run belongs to.'
+		},
+		step: {
+			type: 'object',
+			description: 'The step that was added.'
+		}
+	}
+});
