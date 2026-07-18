@@ -2,9 +2,10 @@ import onetype from '@onetype/framework';
 import agents from '#agents/addon.js';
 
 /*
-	The one place that talks to the model API. Speaks both standard dialects:
-	Anthropic (/v1/messages) and OpenAI compatible (/v1/chat/completions),
-	picked by the endpoint. Single call, no loops — the executor owns those.
+	The one place that talks to a model API. The model arrives as
+	provider/model — the provider item carries the dialect and the
+	default endpoint, the vault carries the instance endpoint and key.
+	Single call, no loops — the executor owns those.
 
 	Returns a normalized shape either way:
 	{ text, calls: [{ id, name, input }], stop, usage, raw }
@@ -12,22 +13,33 @@ import agents from '#agents/addon.js';
 
 agents.Fn('client', async function({ system = null, messages = [], tools = [], model = null })
 {
-	const endpoint = ($ot.vault ? await $ot.vault.get('AGENTS_ENDPOINT') : process.env.AGENTS_ENDPOINT) || '';
-	const key = $ot.vault ? await $ot.vault.get('AGENTS_API_KEY') : process.env.AGENTS_API_KEY;
+	const read = async (key) => $ot.vault ? await $ot.vault.get(key) : process.env[key];
 
-	if(!endpoint)
+	const selector = model || await read('AGENTS_MODEL') || '';
+	const split = selector.indexOf('/');
+
+	if(split === -1)
 	{
-		throw onetype.Error(500, 'AGENTS_ENDPOINT is not set. Fill it in the vault.');
+		throw onetype.Error(500, 'Model :selector: is not a provider/model pair. Set AGENTS_MODEL in the vault.', { selector });
 	}
 
-	model = model || ($ot.vault ? await $ot.vault.get('AGENTS_MODEL') : process.env.AGENTS_MODEL) || 'default';
+	const provider = this.providers.ItemGet(selector.slice(0, split));
+
+	if(!provider)
+	{
+		throw onetype.Error(500, 'Provider :id: is not registered.', { id: selector.slice(0, split) });
+	}
+
+	const endpoint = await read(this.providers.Fn('key', provider, 'ENDPOINT')) || provider.Get('endpoint');
+	const key = await read(this.providers.Fn('key', provider, 'API_KEY'));
+	const anthropic = provider.Get('dialect') === 'anthropic';
 
 	const base = endpoint.replace(/\/$/, '');
-	const anthropic = base.includes('anthropic');
+	const id = selector.slice(split + 1);
 
 	const request = anthropic
-		? this.Fn('client.anthropic', { base, key, model, system, messages, tools })
-		: this.Fn('client.openai', { base, key, model, system, messages, tools });
+		? this.Fn('client.anthropic', { base, key, model: id, system, messages, tools })
+		: this.Fn('client.openai', { base, key, model: id, system, messages, tools });
 
 	const response = await fetch(request.url, {
 		method: 'POST',
@@ -51,7 +63,11 @@ agents.Fn('client', async function({ system = null, messages = [], tools = [], m
 
 agents.Fn('client.anthropic', function({ base, key, model, system, messages, tools })
 {
-	const body = { model, max_tokens: 8192, messages };
+	const body = {
+		model,
+		max_tokens: 8192,
+		messages
+	};
 
 	system && (body.system = system);
 
@@ -78,7 +94,11 @@ agents.Fn('client.anthropic.read', function(raw)
 
 	return {
 		text: blocks.filter((block) => block.type === 'text').map((block) => block.text).join(''),
-		calls: blocks.filter((block) => block.type === 'tool_use').map((block) => ({ id: block.id, name: block.name, input: block.input })),
+		calls: blocks.filter((block) => block.type === 'tool_use').map((block) => ({
+			id: block.id,
+			name: block.name,
+			input: block.input
+		})),
 		stop: raw.stop_reason,
 		usage: raw.usage || null,
 		raw
@@ -116,9 +136,11 @@ agents.Fn('client.openai', function({ base, key, model, system, messages, tools 
 agents.Fn('client.openai.read', function(raw)
 {
 	const message = raw.choices?.[0]?.message || {};
+	const text = message.content || '';
+	const think = text.indexOf('</think>');
 
 	return {
-		text: message.content || '',
+		text: think === -1 ? text : text.slice(think + 8).trim(),
 		calls: (message.tool_calls || []).map((call) => ({
 			id: call.id,
 			name: call.function.name,
