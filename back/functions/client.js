@@ -1,5 +1,5 @@
 import onetype from '@onetype/framework';
-import orchestration from '#orchestration/addon.js';
+import agents from '#agents/addon.js';
 
 /*
 	The one place that talks to the model API. Speaks both standard dialects:
@@ -10,17 +10,17 @@ import orchestration from '#orchestration/addon.js';
 	{ text, calls: [{ id, name, input }], stop, usage, raw }
 */
 
-orchestration.Fn('client', async function({ system = null, messages = [], tools = [], model = null })
+agents.Fn('client', async function({ system = null, messages = [], tools = [], model = null })
 {
-	const endpoint = ($ot.vault ? await $ot.vault.get('ORCHESTRATION_ENDPOINT') : process.env.ORCHESTRATION_ENDPOINT) || '';
-	const key = $ot.vault ? await $ot.vault.get('ORCHESTRATION_API_KEY') : process.env.ORCHESTRATION_API_KEY;
+	const endpoint = ($ot.vault ? await $ot.vault.get('AGENTS_ENDPOINT') : process.env.AGENTS_ENDPOINT) || '';
+	const key = $ot.vault ? await $ot.vault.get('AGENTS_API_KEY') : process.env.AGENTS_API_KEY;
 
 	if(!endpoint)
 	{
-		throw onetype.Error(500, 'ORCHESTRATION_ENDPOINT is not set. Fill it in the vault.');
+		throw onetype.Error(500, 'AGENTS_ENDPOINT is not set. Fill it in the vault.');
 	}
 
-	model = model || ($ot.vault ? await $ot.vault.get('ORCHESTRATION_MODEL') : process.env.ORCHESTRATION_MODEL) || 'default';
+	model = model || ($ot.vault ? await $ot.vault.get('AGENTS_MODEL') : process.env.AGENTS_MODEL) || 'default';
 
 	const base = endpoint.replace(/\/$/, '');
 	const anthropic = base.includes('anthropic');
@@ -49,7 +49,7 @@ orchestration.Fn('client', async function({ system = null, messages = [], tools 
 
 /* Anthropic dialect */
 
-orchestration.Fn('client.anthropic', function({ base, key, model, system, messages, tools })
+agents.Fn('client.anthropic', function({ base, key, model, system, messages, tools })
 {
 	const body = { model, max_tokens: 8192, messages };
 
@@ -72,7 +72,7 @@ orchestration.Fn('client.anthropic', function({ base, key, model, system, messag
 	};
 });
 
-orchestration.Fn('client.anthropic.read', function(raw)
+agents.Fn('client.anthropic.read', function(raw)
 {
 	const blocks = raw.content || [];
 
@@ -87,7 +87,7 @@ orchestration.Fn('client.anthropic.read', function(raw)
 
 /* OpenAI compatible dialect */
 
-orchestration.Fn('client.openai', function({ base, key, model, system, messages, tools })
+agents.Fn('client.openai', function({ base, key, model, system, messages, tools })
 {
 	const body = {
 		model,
@@ -113,7 +113,7 @@ orchestration.Fn('client.openai', function({ base, key, model, system, messages,
 	};
 });
 
-orchestration.Fn('client.openai.read', function(raw)
+agents.Fn('client.openai.read', function(raw)
 {
 	const message = raw.choices?.[0]?.message || {};
 

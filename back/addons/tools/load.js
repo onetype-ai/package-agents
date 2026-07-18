@@ -1,12 +1,13 @@
-import '#orchestration/addons/tools/addon.js';
+import '#agents/addons/tools/addon.js';
 
 /* Core */
-import '#orchestration/addons/tools/core/schemas/tool.js';
+import '#agents/addons/tools/core/schemas/tool.js';
 
 /* Functions */
-import '#orchestration/addons/tools/functions/name.js';
-import '#orchestration/addons/tools/functions/definition.js';
-import '#orchestration/addons/tools/functions/run.js';
+import '#agents/addons/tools/functions/name.js';
+import '#agents/addons/tools/functions/definition.js';
+import '#agents/addons/tools/functions/run.js';
+import '#agents/addons/tools/functions/for.js';
 
 /* Items */
-import '#orchestration/addons/tools/items/commands/crud/many.js';
+import '#agents/addons/tools/items/commands/crud/many.js';

@@ -1,7 +1,7 @@
 import onetype from '@onetype/framework';
-import orchestration from '#orchestration/addon.js';
+import agents from '#agents/addon.js';
 
-orchestration.tools.Fn('run', async function(name, input = {}, context = {})
+agents.tools.Fn('run', async function(name, input = {}, context = {})
 {
 	const tool = Object.values(this.Items()).find((item) => this.Fn('name', item) === name);
 

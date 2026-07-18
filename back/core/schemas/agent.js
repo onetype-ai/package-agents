@@ -1,6 +1,6 @@
 import onetype from '@onetype/framework';
 
-onetype.DataSchema('orchestration.agent', {
+onetype.DataSchema('agents.agent', {
 	id: {
 		type: 'string',
 		description: 'Unique agent id.'

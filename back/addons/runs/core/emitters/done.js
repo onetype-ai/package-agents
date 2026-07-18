@@ -1,8 +1,8 @@
 import onetype from '@onetype/framework';
 
-onetype.EmitRegister('orchestration.runs.done', {
+onetype.EmitRegister('agents.runs.done', {
 	description: 'Fires when a run finishes, done or failed.',
-	metadata: { addon: 'orchestration.runs' },
+	metadata: { addon: 'agents.runs' },
 	config: {
 		id: {
 			type: 'string',

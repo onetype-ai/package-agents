@@ -1,18 +1,18 @@
 import commands from '@onetype/framework/commands';
-import orchestration from '#orchestration/addon.js';
+import agents from '#agents/addon.js';
 
 commands.Item({
-	id: 'orchestration:agents:many',
+	id: 'agents:many',
 	exposed: true,
 	method: 'GET',
-	endpoint: '/api/orchestration/agents',
+	endpoint: '/api/agents',
 	description: 'Lists every registered agent with its description and tools.',
-	metadata: { addon: 'orchestration.agents' },
+	metadata: { addon: 'agents' },
 	condition: function()
 	{
 		if(!this.http || !this.http.state.user)
 		{
-			return 'Sign in to use Orah.';
+			return 'Sign in to use agents.';
 		}
 	},
 	out: {
@@ -20,14 +20,14 @@ commands.Item({
 			type: 'array',
 			each: {
 				type: 'object',
-				config: 'orchestration.agent'
+				config: 'agents.agent'
 			},
 			description: 'The registered agents.'
 		}
 	},
 	callback: function(properties, resolve)
 	{
-		const agents = Object.values(orchestration.agents.Items()).map((agent) => ({
+		const items = Object.values(agents.Items()).map((agent) => ({
 			id: agent.Get('id'),
 			name: agent.Get('name'),
 			description: agent.Get('description'),
@@ -35,6 +35,6 @@ commands.Item({
 			tools: agent.Get('tools') || []
 		}));
 
-		resolve({ agents });
+		resolve({ agents: items });
 	}
 });

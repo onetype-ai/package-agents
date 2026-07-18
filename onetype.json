@@ -1,7 +1,7 @@
 {
 	"type": "package",
-	"slug": "onetype/orchestration",
-	"name": "Orchestration",
+	"slug": "onetype/agents",
+	"name": "Agents",
 	"version": "0.1.0",
 	"description": "The agentic engine of the instance. Agents, tools and runs — packages declare what their agents can do, consumers hand them research questions and tasks, every run is recorded step by step.",
 	"icon": "hub",

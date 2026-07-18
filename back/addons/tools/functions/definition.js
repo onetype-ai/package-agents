@@ -1,6 +1,6 @@
-import orchestration from '#orchestration/addon.js';
+import agents from '#agents/addon.js';
 
-orchestration.tools.Fn('definition', function(tool)
+agents.tools.Fn('definition', function(tool)
 {
 	const input = tool.Get('input') || {};
 	const properties = {};

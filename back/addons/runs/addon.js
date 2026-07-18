@@ -1,10 +1,10 @@
 import onetype from '@onetype/framework';
 
-onetype.AddonReady('orchestration', (orchestration) =>
+onetype.AddonReady('agents', (agents) =>
 {
-	orchestration.runs = onetype.Addon('orchestration.runs', (addon) =>
+	agents.runs = onetype.Addon('agents.runs', (addon) =>
 	{
-		addon.Table('orchestration_runs');
+		addon.Table('agents_runs');
 
 		addon.Field('id', {
 			type: 'string',

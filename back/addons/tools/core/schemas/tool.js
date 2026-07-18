@@ -1,6 +1,6 @@
 import onetype from '@onetype/framework';
 
-onetype.DataSchema('orchestration.tool', {
+onetype.DataSchema('agents.tool', {
 	id: {
 		type: 'string',
 		description: 'Unique tool id.'
@@ -16,6 +16,10 @@ onetype.DataSchema('orchestration.tool', {
 	input: {
 		type: 'object',
 		description: 'Input fields the tool accepts.'
+	},
+	isGlobal: {
+		type: 'boolean',
+		description: 'Whether every agent gets this tool automatically.'
 	},
 	command: {
 		type: 'string',

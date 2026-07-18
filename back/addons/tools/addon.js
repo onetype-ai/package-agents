@@ -1,8 +1,8 @@
 import onetype from '@onetype/framework';
 
-onetype.AddonReady('orchestration', (orchestration) =>
+onetype.AddonReady('agents', (agents) =>
 {
-	orchestration.tools = onetype.Addon('orchestration.tools', (addon) =>
+	agents.tools = onetype.Addon('agents.tools', (addon) =>
 	{
 		addon.Field('id', {
 			type: 'string',
@@ -25,6 +25,12 @@ onetype.AddonReady('orchestration', (orchestration) =>
 			type: 'object',
 			value: {},
 			description: 'Input fields the tool accepts: { field: { type, description, required } }.'
+		});
+
+		addon.Field('isGlobal', {
+			type: 'boolean',
+			value: false,
+			description: 'When true every agent gets this tool, without listing it.'
 		});
 
 		addon.Field('command', {

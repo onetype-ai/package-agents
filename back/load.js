@@ -1,14 +1,18 @@
-import orchestration from '#orchestration/addon.js';
+import agents from '#agents/addon.js';
+
+/* Core */
+import '#agents/core/schemas/agent.js';
 
 /* Addons */
-import '#orchestration/addons/agents/load.js';
-import '#orchestration/addons/tools/load.js';
-import '#orchestration/addons/runs/load.js';
+import '#agents/addons/tools/load.js';
+import '#agents/addons/runs/load.js';
 
 /* Functions */
-import '#orchestration/functions/client.js';
+import '#agents/functions/client.js';
 
 /* Items */
-import '#orchestration/items/vault/keys.js';
+import '#agents/items/commands/crud/many.js';
+import '#agents/items/tools/list.js';
+import '#agents/items/vault/keys.js';
 
-export default orchestration;
+export default agents;
