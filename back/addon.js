@@ -34,6 +34,29 @@ const agents = onetype.Addon('agents', (addon) =>
 		type: 'string',
 		description: 'Model override for this agent. Falls back to the instance model.'
 	});
+
+	addon.Field('metadata', {
+		type: 'object',
+		value: {},
+		description: 'Provider specific settings for this agent, like { tools: [...] } for a provider that runs an external CLI with its own tool set.'
+	});
+
+	addon.Field('parent', {
+		type: 'string',
+		description: 'Id of the agent that owns this one. A child agent is only visible to and callable by its parent — nobody else sees it in agents:list or may target it with agents:run. Empty for top level agents.'
+	});
+
+	addon.Field('isHidden', {
+		type: 'boolean',
+		value: false,
+		description: 'When true, only this agent itself may run itself — not even its parent sees it in agents:list or may target it with agents:run.'
+	});
+
+	addon.Field('maxTurns', {
+		type: 'number',
+		value: 24,
+		description: 'Maximum client/tool rounds before the run stops and returns whatever it has, even mid task.'
+	});
 });
 
 export default agents;
