@@ -39,6 +39,7 @@ agents.Fn('run', async function({ agent, mode = 'task', messages = [], context =
 			system,
 			messages,
 			tools,
+			metadata: item.Get('metadata'),
 			caller: caller || agent
 		});
 
