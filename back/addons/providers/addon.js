@@ -49,6 +49,14 @@ onetype.AddonReady('agents', (agents) =>
 						type: 'string',
 						description: 'Human readable model name.'
 					},
+					input: {
+						type: 'number',
+						description: 'Price in cents per million input tokens.'
+					},
+					output: {
+						type: 'number',
+						description: 'Price in cents per million output tokens.'
+					},
 					description: {
 						type: 'string',
 						description: 'What the model is good at, shown when picking one.'

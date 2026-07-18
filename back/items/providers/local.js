@@ -11,6 +11,8 @@ onetype.AddonReady('agents.providers', (providers) =>
 		models: [
 			{
 				id: 'qwen3.6-27b',
+				input: 0,
+				output: 0,
 				name: 'Qwen 3.6 27B',
 				description: 'The local workhorse, runs on our own metal.'
 			}
