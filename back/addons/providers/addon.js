@@ -23,20 +23,22 @@ onetype.AddonReady('agents', (agents) =>
 
 		addon.Field('send', {
 			type: 'function',
-			required: true,
-			description: 'Turns the standardized request { endpoint, key, model, system, messages, tools } into { url, headers, body } for the API.'
+			description: 'Turns the standardized request { endpoint, key, model, system, messages, tools } into { url, headers, body } for the API. Required unless the provider defines call instead.'
 		});
 
 		addon.Field('receive', {
 			type: 'function',
-			required: true,
-			description: 'Turns the raw API response into the standardized { text, calls, stop, usage } shape.'
+			description: 'Turns the raw API response into the standardized { text, calls, stop, usage } shape. Required unless the provider defines call instead.'
+		});
+
+		addon.Field('call', {
+			type: 'function',
+			description: 'For providers with no plain HTTP endpoint (gRPC to a developer machine, a local subprocess...): takes the standardized request and returns the standardized result directly, bypassing send/receive/fetch.'
 		});
 
 		addon.Field('endpoint', {
 			type: 'string',
-			required: true,
-			description: 'Default base URL of the API. The vault endpoint key starts with this value and can be changed per instance.'
+			description: 'Default base URL of the API. The vault endpoint key starts with this value and can be changed per instance. Omit for providers that define call.'
 		});
 
 		addon.Field('models', {

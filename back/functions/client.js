@@ -13,7 +13,7 @@ import agents from '#agents/addon.js';
 	Out: { text, calls: [{ id, name, input }], stop: 'end' | 'tools' | 'length', usage: { input, output } }
 */
 
-agents.Fn('client', async function({ system = null, messages = [], tools = [], model = null, caller = null, run = null })
+agents.Fn('client', async function({ system = null, messages = [], tools = [], model = null, caller = null, run = null, metadata = {} })
 {
 	const read = async (key) => $ot.vault ? await $ot.vault.get(key) : process.env[key];
 
@@ -33,15 +33,15 @@ agents.Fn('client', async function({ system = null, messages = [], tools = [], m
 	}
 
 	const request = {
-		endpoint: (await read(this.providers.Fn('key', provider, 'ENDPOINT')) || provider.Get('endpoint')).replace(/\/$/, ''),
-		key: await read(this.providers.Fn('key', provider, 'API_KEY')),
+		endpoint: provider.Get('endpoint') ? (await read(this.providers.Fn('key', provider, 'ENDPOINT')) || provider.Get('endpoint')).replace(/\/$/, '') : null,
+		key: provider.Get('endpoint') ? await read(this.providers.Fn('key', provider, 'API_KEY')) : null,
 		model: selector.slice(split + 1),
 		system,
 		messages,
-		tools
+		tools,
+		metadata
 	};
 
-	const { url, headers, body } = provider.Get('send')(request);
 	const started = performance.now();
 
 	/* Recording is best effort — telemetry must never sink the model call. */
@@ -65,6 +65,30 @@ agents.Fn('client', async function({ system = null, messages = [], tools = [], m
 		{
 		}
 	};
+
+	/* Providers without a plain HTTP endpoint (gRPC to a developer's machine,
+	   a local subprocess...) implement call() directly instead of send/receive. */
+	if(provider.Get('call'))
+	{
+		let result;
+
+		try
+		{
+			result = await provider.Get('call')(request);
+		}
+		catch(error)
+		{
+			await record(null, error.message);
+
+			throw error;
+		}
+
+		await record(result, null);
+
+		return result;
+	}
+
+	const { url, headers, body } = provider.Get('send')(request);
 
 	let response;
 
