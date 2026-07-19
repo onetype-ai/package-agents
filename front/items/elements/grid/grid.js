@@ -59,7 +59,7 @@ onetype.AddonReady('elements', (elements) =>
 						:_click="open(agent)"
 					>
 						<div slot="bottom">
-							<e-global-tags ot-if="agent.tools.length" :items="agent.tools"></e-global-tags>
+							<e-global-tags ot-if="agent.tools.length" :items="agent.tools" :background="2"></e-global-tags>
 						</div>
 					</e-cards-item>
 				</div>
