@@ -57,7 +57,11 @@ onetype.AddonReady('elements', (elements) =>
 						badge=""
 						:meta="meta(agent)"
 						:_click="open(agent)"
-					></e-cards-item>
+					>
+						<div slot="bottom">
+							<e-global-tags ot-if="agent.tools.length" :items="agent.tools"></e-global-tags>
+						</div>
+					</e-cards-item>
 				</div>
 			`;
 		}
