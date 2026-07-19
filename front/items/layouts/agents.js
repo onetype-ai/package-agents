@@ -10,7 +10,7 @@ onetype.AddonReady('ui.layouts', (layouts) =>
 		{
 			return /* html */ `
 				<div class="ot-container-full ot-py-l ot-dots ot-fill">
-					<e-agents-grid></e-agents-grid>
+					<e-agents-tree></e-agents-tree>
 				</div>
 			`;
 		}

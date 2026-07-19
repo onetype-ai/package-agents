@@ -32,7 +32,9 @@ commands.Item({
 			name: agent.Get('name'),
 			description: agent.Get('description'),
 			instructions: agent.Get('instructions'),
-			tools: agent.Get('tools') || []
+			tools: agent.Get('tools') || [],
+			parent: agent.Get('parent') || '',
+			persona: agent.Get('persona') || null
 		}));
 
 		resolve({ agents: items });

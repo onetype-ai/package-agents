@@ -34,6 +34,7 @@ import '#agents/items/tools/test/vault/get.js';
 import '#agents/items/tools/test/vault/set.js';
 import '#agents/items/tools/test/vault/clear.js';
 import '#agents/items/agents/test/vault.js';
+import '#agents/items/agents/test/crew.js';
 import '#agents/items/providers/anthropic.js';
 import '#agents/items/providers/openai.js';
 import '#agents/items/providers/local.js';
