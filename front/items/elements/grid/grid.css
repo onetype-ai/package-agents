@@ -1,0 +1,14 @@
+/* ===== AGENTS GRID ===== */
+
+.e-14363fcf
+{
+	display: block;
+	width: 100%;
+}
+
+.e-14363fcf > .grid
+{
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: var(--ot-spacing-m);
+}
