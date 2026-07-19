@@ -51,12 +51,9 @@ onetype.AddonReady('elements', (elements) =>
 					color: agent.persona && agent.persona.color ? agent.persona.color : 'brand',
 					badge: 'Agent',
 					meta: agent.persona && agent.persona.age ? agent.persona.age + ' yrs' : '',
-					listLabel: 'Tools',
-					list: agent.tools.map((tool) => ({
-						icon: 'construction',
+					tags: agent.tools.map((tool) => ({
 						label: this.catalog[tool] && this.catalog[tool].name ? this.catalog[tool].name : tool,
-						sublabel: this.catalog[tool] && this.catalog[tool].description ? this.catalog[tool].description : '',
-						badge: tool
+						tooltip: this.catalog[tool] && this.catalog[tool].description ? this.catalog[tool].description : tool
 					})),
 					children: this.agents.filter((child) => child.parent === agent.id).map((child) => this.node(child)),
 					agent: agent
