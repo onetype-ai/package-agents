@@ -57,6 +57,14 @@
 	}
 }
 
+/* Quiet notes inside collapsed sections */
+
+.e-72381f9c .quiet
+{
+	font-size: var(--ot-size-s);
+	color: var(--ot-text-3);
+}
+
 /* Header band — the global header loses its frame and keeps only the bottom line */
 
 .e-72381f9c .e-236b31a1 > .box

@@ -145,7 +145,7 @@ elements.ItemAdd({
 												<e-global-heading title="Input" element="h3"></e-global-heading>
 												<e-global-parameters :items="parameters(tool.input)" :background="2"></e-global-parameters>
 											</div>
-											<e-status-empty ot-if="!parameters(tool.input).length" icon="input" title="No input" description="The tool runs without parameters."></e-status-empty>
+											<p ot-if="!parameters(tool.input).length" class="quiet">The tool runs without parameters.</p>
 										</div>
 									</e-core-section>
 								</div>
