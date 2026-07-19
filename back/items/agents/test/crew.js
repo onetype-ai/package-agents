@@ -13,7 +13,8 @@ agents.Item({
 		surname: 'Novak',
 		age: 34,
 		bio: 'Spent a decade in support before machines joined her team. Warm, direct, allergic to canned answers.',
-		color: 'blue'
+		color: 'blue',
+		cover: 'https://picsum.photos/seed/iris-desk/600/120'
 	}
 });
 
@@ -29,7 +30,8 @@ agents.Item({
 		surname: 'Simić',
 		age: 27,
 		bio: 'Reads everything twice. Finds the sentence that will be misunderstood and fixes it before it happens.',
-		color: 'green'
+		color: 'green',
+		cover: 'https://picsum.photos/seed/tea-notes/600/120'
 	}
 });
 
@@ -45,7 +47,8 @@ agents.Item({
 		surname: 'Barić',
 		age: 31,
 		bio: 'Believes every answered question deserves to be answered exactly once. Writes it down so it never comes back.',
-		color: 'orange'
+		color: 'orange',
+		cover: 'https://picsum.photos/seed/luka-library/600/120'
 	}
 });
 
@@ -60,6 +63,7 @@ agents.Item({
 		surname: 'Kolar',
 		age: 41,
 		bio: 'Statistician who hates dashboards without a sentence under them. Every number she shows comes with a why.',
-		color: 'red'
+		color: 'red',
+		cover: 'https://picsum.photos/seed/mira-charts/600/120'
 	}
 });

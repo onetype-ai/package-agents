@@ -49,7 +49,9 @@ onetype.AddonReady('elements', (elements) =>
 					color: agent.persona && agent.persona.color ? agent.persona.color : 'brand',
 					badge: 'Agent',
 					meta: agent.persona && agent.persona.age ? agent.persona.age + ' yrs' : '',
-					list: agent.tools.map((tool) => ({ icon: 'construction', label: tool, badge: 'tool' })),
+					cover: agent.persona && agent.persona.cover ? agent.persona.cover : '',
+					listLabel: 'Tools',
+					list: agent.tools.map((tool) => ({ icon: 'construction', label: tool })),
 					children: this.agents.filter((child) => child.parent === agent.id).map((child) => this.node(child)),
 					agent: agent
 				};

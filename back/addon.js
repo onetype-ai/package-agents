@@ -66,6 +66,10 @@ const agents = onetype.Addon('agents', (addon) =>
 				value: 'blue',
 				options: ['brand', 'blue', 'red', 'orange', 'green'],
 				description: 'Signature color of the persona across the UI.'
+			},
+			cover: {
+				type: 'string',
+				description: 'Profile cover image url. Generated from the bio later, empty falls back to the color gradient.'
 			}
 		},
 		description: 'The human face of the agent: name, surname, age, bio and a signature color. People talk to a person, not a model.'
