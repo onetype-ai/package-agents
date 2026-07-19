@@ -32,29 +32,25 @@ onetype.AddonReady('elements', (elements) =>
 				return agent.persona ? agent.persona.name + ' ' + agent.persona.surname : (agent.name ? agent.name : agent.id);
 			};
 
+			this.initials = (agent) =>
+			{
+				return agent.persona ? agent.persona.name.charAt(0) + agent.persona.surname.charAt(0) : '';
+			};
+
 			this.node = (agent) =>
 			{
-				const children = [
-					...this.agents.filter((child) => child.parent === agent.id).map((child) => this.node(child)),
-					...agent.tools.map((tool) => ({
-						id: agent.id + ':' + tool,
-						title: tool,
-						subtitle: 'Tool',
-						icon: 'construction',
-						color: 'orange',
-						badge: 'Tool'
-					}))
-				];
-
 				return {
 					id: agent.id,
 					title: this.title(agent),
-					subtitle: agent.name ? agent.name : agent.description,
-					icon: agent.persona ? 'face' : 'smart_toy',
+					subtitle: agent.name ? agent.name : agent.id,
+					description: agent.persona && agent.persona.bio ? agent.persona.bio : agent.description,
+					avatar: this.initials(agent),
+					icon: 'smart_toy',
 					color: agent.persona && agent.persona.color ? agent.persona.color : 'brand',
 					badge: 'Agent',
 					meta: agent.persona && agent.persona.age ? agent.persona.age + ' yrs' : '',
-					children: children,
+					list: agent.tools.map((tool) => ({ icon: 'construction', label: tool, badge: 'tool' })),
+					children: this.agents.filter((child) => child.parent === agent.id).map((child) => this.node(child)),
 					agent: agent
 				};
 			};
