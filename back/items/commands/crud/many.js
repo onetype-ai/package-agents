@@ -23,6 +23,32 @@ commands.Item({
 				config: 'agents.agent'
 			},
 			description: 'The registered agents.'
+		},
+		tools: {
+			type: 'array',
+			each: {
+				type: 'object',
+				config: {
+					id: {
+						type: 'string',
+						description: 'Tool id.'
+					},
+					name: {
+						type: 'string',
+						description: 'Human readable tool name.'
+					},
+					description: {
+						type: 'string',
+						description: 'What the tool does.'
+					},
+					isGlobal: {
+						type: 'boolean',
+						description: 'Whether every agent receives this tool.'
+					}
+				},
+				description: 'A single registered tool.'
+			},
+			description: 'The registered tools, so callers can resolve tool ids into names.'
 		}
 	},
 	callback: function(properties, resolve)
@@ -37,6 +63,13 @@ commands.Item({
 			persona: agent.Get('persona') || null
 		}));
 
-		resolve({ agents: items });
+		const tools = Object.values(agents.tools.Items()).map((tool) => ({
+			id: tool.Get('id'),
+			name: tool.Get('name'),
+			description: tool.Get('description'),
+			isGlobal: !!tool.Get('isGlobal')
+		}));
+
+		resolve({ agents: items, tools });
 	}
 });

@@ -17,11 +17,13 @@ onetype.AddonReady('elements', (elements) =>
 		render: function()
 		{
 			this.agents = null;
+			this.catalog = {};
 
 			this.load = async () =>
 			{
 				const { data, code } = await $ot.command('agents:many', {}, true);
 
+				this.catalog = code === 200 ? data.tools.reduce((map, tool) => ({ ...map, [tool.id]: tool }), {}) : {};
 				this.agents = code === 200 ? data.agents : [];
 			};
 
@@ -49,9 +51,13 @@ onetype.AddonReady('elements', (elements) =>
 					color: agent.persona && agent.persona.color ? agent.persona.color : 'brand',
 					badge: 'Agent',
 					meta: agent.persona && agent.persona.age ? agent.persona.age + ' yrs' : '',
-					cover: agent.persona && agent.persona.cover ? agent.persona.cover : '',
 					listLabel: 'Tools',
-					list: agent.tools.map((tool) => ({ icon: 'construction', label: tool })),
+					list: agent.tools.map((tool) => ({
+						icon: 'construction',
+						label: this.catalog[tool] && this.catalog[tool].name ? this.catalog[tool].name : tool,
+						sublabel: this.catalog[tool] && this.catalog[tool].description ? this.catalog[tool].description : '',
+						badge: tool
+					})),
 					children: this.agents.filter((child) => child.parent === agent.id).map((child) => this.node(child)),
 					agent: agent
 				};
