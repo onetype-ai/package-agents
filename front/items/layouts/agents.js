@@ -3,7 +3,7 @@ onetype.AddonReady('ui.layouts', (layouts) =>
 	layouts.Item({
 		id: 'agents-grid',
 		isActive: true,
-		condition: { app: ['agents'] },
+		screen: ['agents'],
 		zone: 'root',
 		slot: 'center',
 		render: function()
