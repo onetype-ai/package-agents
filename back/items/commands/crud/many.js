@@ -44,6 +44,10 @@ commands.Item({
 					isGlobal: {
 						type: 'boolean',
 						description: 'Whether every agent receives this tool.'
+					},
+					input: {
+						type: 'any',
+						description: 'Input schema of the tool, keyed by property.'
 					}
 				},
 				description: 'A single registered tool.'
@@ -67,7 +71,8 @@ commands.Item({
 			id: tool.Get('id'),
 			name: tool.Get('name'),
 			description: tool.Get('description'),
-			isGlobal: !!tool.Get('isGlobal')
+			isGlobal: !!tool.Get('isGlobal'),
+			input: tool.Get('input') || {}
 		}));
 
 		resolve({ agents: items, tools });

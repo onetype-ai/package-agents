@@ -1,0 +1,68 @@
+/* ===== AGENTS AGENT ===== */
+
+.e-72381f9c
+{
+	display: block;
+	width: 100%;
+}
+
+.e-72381f9c > .box
+{
+	display: flex;
+	flex-direction: column;
+}
+
+/* Columns */
+
+.e-72381f9c .columns
+{
+	display: grid;
+	grid-template-columns: 240px minmax(0, 1fr);
+	gap: var(--ot-spacing-l);
+	align-items: start;
+}
+
+.e-72381f9c .columns > .side
+{
+	position: sticky;
+	top: var(--ot-spacing-l);
+}
+
+.e-72381f9c .columns > .content
+{
+	display: flex;
+	flex-direction: column;
+	gap: var(--ot-spacing-l);
+	min-width: 0;
+}
+
+.e-72381f9c .columns > .content > .block
+{
+	display: flex;
+	flex-direction: column;
+	gap: var(--ot-spacing-m);
+	scroll-margin-top: var(--ot-spacing-l);
+}
+
+@media (max-width: 900px)
+{
+	.e-72381f9c .columns
+	{
+		grid-template-columns: 1fr;
+	}
+
+	.e-72381f9c .columns > .side
+	{
+		position: static;
+	}
+}
+
+/* Header band — the global header loses its frame and keeps only the bottom line */
+
+.e-72381f9c .e-236b31a1 > .box
+{
+	padding: var(--ot-spacing-l) 0;
+	border: 0;
+	border-bottom: 1px solid var(--ot-bg-1-border);
+	border-radius: 0;
+}
