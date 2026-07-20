@@ -7,7 +7,7 @@ onetype.AddonReady('agents.tools', (tools) =>
 		id: 'agents:run',
 		name: 'Run agent',
 		description: 'Runs another agent. research asks a question and returns a precise answer, task gives instructions and returns a report of what was done.',
-		isGlobal: true,
+		isGlobal: false,
 		input: {
 			agent: {
 				type: 'string',

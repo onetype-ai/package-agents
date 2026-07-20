@@ -24,5 +24,9 @@ onetype.DataSchema('agents.tool', {
 	command: {
 		type: 'string',
 		description: 'Command id the tool runs, null when it runs a callback.'
+	},
+	metadata: {
+		type: 'object',
+		description: 'Free extra data — agent tools carry the id of the agent they run.'
 	}
 });

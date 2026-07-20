@@ -6,7 +6,7 @@ import agents from '#agents/addon.js';
 	tools until the agent stops talking to tools, returns what it said.
 
 	In:  { agent, mode: 'conversation' | 'research' | 'task', messages, context, caller, model }
-	Out: { text, messages, steps: [{ tool, input, output }] }
+	Out: { text, reasoning, messages, steps: [{ tool, input, output }] }
 */
 
 agents.Fn('run', async function({ agent, mode = 'task', messages = [], context = {}, caller = null, model = null })
@@ -29,6 +29,7 @@ agents.Fn('run', async function({ agent, mode = 'task', messages = [], context =
 	const system = [item.Get('instructions') || '', framings[mode] || framings.task].filter(Boolean).join('\n\n');
 	const tools = this.tools.Fn('for', item).map((tool) => this.tools.Fn('definition', tool));
 	const steps = [];
+	const thoughts = [];
 
 	let text = '';
 
@@ -43,9 +44,10 @@ agents.Fn('run', async function({ agent, mode = 'task', messages = [], context =
 			caller: caller || agent
 		});
 
-		messages.push({ role: 'assistant', text: response.text, calls: response.calls });
+		messages.push({ role: 'assistant', text: response.text, calls: response.calls, reasoning: response.reasoning });
 
 		text = response.text;
+		response.reasoning && thoughts.push(response.reasoning);
 
 		if(response.stop !== 'tools' || !response.calls.length)
 		{
@@ -54,6 +56,12 @@ agents.Fn('run', async function({ agent, mode = 'task', messages = [], context =
 
 		for(const call of response.calls)
 		{
+			/* The trace entry lands before the tool runs — anyone watching
+			   the trace sees the step as active until output arrives. */
+			const entry = { agent, tool: call.name, input: call.input, output: null };
+
+			context._trace && context._trace.push(entry);
+
 			let output;
 
 			try
@@ -67,11 +75,11 @@ agents.Fn('run', async function({ agent, mode = 'task', messages = [], context =
 
 			output = typeof output === 'string' ? output : JSON.stringify(output ?? null);
 
+			entry.output = output;
 			steps.push({ tool: call.name, input: call.input, output });
-			context._trace && context._trace.push({ agent, tool: call.name, input: call.input, output });
 			messages.push({ role: 'tool', id: call.id, output });
 		}
 	}
 
-	return { text, messages, steps };
+	return { text, reasoning: thoughts.join('\n\n'), messages, steps };
 });

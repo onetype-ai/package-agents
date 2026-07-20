@@ -42,5 +42,10 @@ onetype.AddonReady('agents', (agents) =>
 			type: 'function',
 			description: 'Function to run instead of a command. Receives the input, returns the result.'
 		});
+
+		addon.Field('metadata', {
+			type: 'object',
+			description: 'Free extra data — agent tools carry the id of the agent they run.'
+		});
 	});
 });

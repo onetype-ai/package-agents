@@ -101,6 +101,7 @@ onetype.AddonReady('agents.providers', (providers) =>
 
 			return {
 				text: think === -1 ? text : text.slice(think + 8).trim(),
+				reasoning: (message.reasoning || message.reasoning_content || (think === -1 ? '' : text.slice(0, think).replace('<think>', ''))).trim(),
 				calls: (message.tool_calls || []).map((call) => ({
 					id: call.id,
 					name: call.function.name,

@@ -11,6 +11,9 @@
 	"depends": [
 		"onetype/vault"
 	],
+	"runtimes": [
+		"admin"
+	],
 	"permissions": [],
 	"limits": {},
 	"features": {},

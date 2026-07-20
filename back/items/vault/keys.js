@@ -19,6 +19,6 @@ onetype.AddonReady('vault.keys', (keys) =>
 		description: 'The model agents run on unless they override it, as provider/model.',
 		category: 'agents',
 		group: 'Agents',
-		value: 'local/qwen3.6-27b'
+		value: 'local/qwen3.5-9b'
 	});
 });

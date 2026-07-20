@@ -7,7 +7,7 @@ onetype.AddonReady('agents.tools', (tools) =>
 		id: 'agents:list',
 		name: 'List agents',
 		description: 'Lists every agent you may delegate to, one per line as id | description. Call it to learn who exists before delegating.',
-		isGlobal: true,
+		isGlobal: false,
 		input: {},
 		callback: function()
 		{

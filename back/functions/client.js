@@ -10,7 +10,7 @@ import agents from '#agents/addon.js';
 		          { role: 'tool', id, output }
 		tools:    { name, description, input } — input is a JSON schema object
 
-	Out: { text, calls: [{ id, name, input }], stop: 'end' | 'tools' | 'length', usage: { input, output } }
+	Out: { text, reasoning, calls: [{ id, name, input }], stop: 'end' | 'tools' | 'length', usage: { input, output } }
 */
 
 agents.Fn('client', async function({ system = null, messages = [], tools = [], model = null, caller = null, run = null, metadata = {} })

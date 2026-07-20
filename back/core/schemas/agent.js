@@ -17,6 +17,10 @@ onetype.DataSchema('agents.agent', {
 		type: 'string',
 		description: 'System instructions the agent runs with.'
 	},
+	model: {
+		type: 'string',
+		description: 'Model this agent runs on as provider/model, empty falls back to the instance default.'
+	},
 	tools: {
 		type: 'array',
 		description: 'Ids of the tools this agent may run.'
