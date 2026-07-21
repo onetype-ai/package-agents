@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 onetype.AddonReady('agents.providers', (providers) =>
 {
 	providers.Item({

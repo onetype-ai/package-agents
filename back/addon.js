@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 const agents = onetype.Addon('agents', (addon) =>
 {
 	addon.Field('id', {

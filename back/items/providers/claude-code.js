@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 /*
 	Claude over the Claude Code subscription — the Go bridge in
 	agents/claude-bridge spawns `claude -p` per call and speaks a plain

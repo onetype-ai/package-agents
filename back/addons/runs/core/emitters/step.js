@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 onetype.EmitRegister('agents.runs.step', {
 	description: 'Fires after every tool call inside a run, with the step that was added.',
 	metadata: { addon: 'agents.runs' },

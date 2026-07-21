@@ -1,4 +1,3 @@
-import onetype from '@onetype/framework';
 import agents from '#agents/addon.js';
 
 agents.tools.Fn('run', async function(name, input = {}, context = {})

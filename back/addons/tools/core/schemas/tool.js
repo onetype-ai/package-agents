@@ -1,6 +1,4 @@
-import onetype from '@onetype/framework';
-
-onetype.DataSchema('agents.tool', {
+onetype.SchemasRegister('agents.tool', {
 	id: {
 		type: 'string',
 		description: 'Unique tool id.'

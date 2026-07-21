@@ -1,4 +1,3 @@
-import onetype from '@onetype/framework';
 import agents from '#agents/addon.js';
 
 agents.requests.Fn('record', async function({ provider, model, caller, run, input, output, usage, duration, error })

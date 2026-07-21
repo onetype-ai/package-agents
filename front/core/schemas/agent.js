@@ -1,4 +1,4 @@
-onetype.DataSchema('agents.agent', {
+onetype.SchemasRegister('agents.agent', {
 	id: {
 		type: 'string',
 		description: 'Unique agent id.'

@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 onetype.EmitRegister('agents.requests.add', {
 	description: 'Fires after every model request is recorded, done or failed.',
 	metadata: { addon: 'agents.requests' },

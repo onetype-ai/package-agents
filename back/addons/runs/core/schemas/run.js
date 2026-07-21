@@ -1,6 +1,4 @@
-import onetype from '@onetype/framework';
-
-onetype.DataSchema('agents.run', {
+onetype.SchemasRegister('agents.run', {
 	id: {
 		type: 'string',
 		description: 'Run id.'

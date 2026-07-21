@@ -1,6 +1,4 @@
-import onetype from '@onetype/framework';
-
-onetype.DataSchema('agents.request', {
+onetype.SchemasRegister('agents.request', {
 	id: {
 		type: 'string',
 		description: 'Request id.'

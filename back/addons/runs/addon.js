@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 onetype.AddonReady('agents', (agents) =>
 {
 	agents.runs = onetype.Addon('agents.runs', (addon) =>

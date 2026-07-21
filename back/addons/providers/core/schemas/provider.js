@@ -1,6 +1,4 @@
-import onetype from '@onetype/framework';
-
-onetype.DataSchema('agents.provider', {
+onetype.SchemasRegister('agents.provider', {
 	id: {
 		type: 'string',
 		description: 'Unique provider id.'

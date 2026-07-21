@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 /* Temporary test tool — delete once real tools exist. */
 
 onetype.AddonReady('agents.tools', (tools) =>
