@@ -1,7 +1,7 @@
 import '#agents/addons/tools/addon.js';
 
 /* Core */
-import '#agents/addons/tools/core/schemas/tool.js';
+import '#agents/addons/tools/_/schemas/tool.js';
 
 /* Functions */
 import '#agents/addons/tools/functions/name.js';
