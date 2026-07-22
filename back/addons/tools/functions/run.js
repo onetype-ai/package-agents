@@ -2,29 +2,29 @@ import agents from '#agents/addon.js';
 
 agents.tools.Fn('run', async function(name, input = {}, context = {})
 {
-	const tool = Object.values(this.Items()).find((item) => this.Fn('name', item) === name);
+    const tool = Object.values(this.Items()).find((item) => this.Fn('name', item) === name);
 
-	if(!tool)
-	{
-		throw onetype.Error(404, 'Tool ' + name + ' is not registered.');
-	}
+    if(!tool)
+    {
+        throw onetype.Error(404, 'Tool ' + name + ' is not registered.');
+    }
 
-	if(tool.Get('command'))
-	{
-		const result = await $ot.command(tool.Get('command'), input, context, true);
+    if(tool.Get('command'))
+    {
+        const result = await $ot.command(tool.Get('command'), input, context, true);
 
-		if(result.code !== 200)
-		{
-			throw onetype.Error(result.code, result.message);
-		}
+        if(result.code !== 200)
+        {
+            throw onetype.Error(result.code, result.message);
+        }
 
-		return result.data;
-	}
+        return result.data;
+    }
 
-	if(tool.Get('callback'))
-	{
-		return await tool.Get('callback').call(context, input);
-	}
+    if(tool.Get('callback'))
+    {
+        return await tool.Get('callback').call(context, input);
+    }
 
-	throw onetype.Error(500, 'Tool ' + name + ' has neither a command nor a callback.');
+    throw onetype.Error(500, 'Tool ' + name + ' has neither a command nor a callback.');
 });

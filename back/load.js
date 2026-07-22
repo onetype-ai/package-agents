@@ -28,9 +28,9 @@ import '#agents/items/vault/keys.js';
 
 /* Back facade */
 $ot.agents = {
-	run: (options) => agents.Fn('run', options),
-	client: (options) => agents.Fn('client', options),
-	items: () => Object.values(agents.Items())
+    run: (options) => agents.Fn('run', options),
+    client: (options) => agents.Fn('client', options),
+    items: () => Object.values(agents.Items())
 };
 
 export default agents;
