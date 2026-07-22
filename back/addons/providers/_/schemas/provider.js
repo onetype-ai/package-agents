@@ -18,7 +18,7 @@ onetype.SchemasRegister('agents.provider', {
     models: {
         type: 'array',
         each: {
-            type: 'object'
+            type: 'json'
         },
         description: 'Models the provider offers, with id, name and description.'
     }

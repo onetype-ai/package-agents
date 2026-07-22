@@ -12,7 +12,7 @@ onetype.SchemasRegister('agents.tool', {
         description: 'What the tool does — the model reads this to decide when to use it.'
     },
     input: {
-        type: 'object',
+        type: 'json',
         description: 'Input fields the tool accepts.'
     },
     isGlobal: {
@@ -24,7 +24,7 @@ onetype.SchemasRegister('agents.tool', {
         description: 'Command id the tool runs, null when it runs a callback.'
     },
     metadata: {
-        type: 'object',
+        type: 'json',
         description: 'Free extra data — agent tools carry the id of the agent they run.'
     }
 });
