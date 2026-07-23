@@ -43,10 +43,10 @@ onetype.AddonReady('elements', (elements) =>
             };
 
             return /* html */ `
-                <e-status-loading ot-if="!agents" :background="0"></e-status-loading>
-                <e-status-empty ot-if="agents && !agents.length" icon="hub" title="No agents yet" description="Install a package that ships an agent, or declare one of your own." :background="0"></e-status-empty>
+                <e-admin-status-loading ot-if="!agents" :background="0"></e-admin-status-loading>
+                <e-admin-status-empty ot-if="agents && !agents.length" icon="hub" title="No agents yet" description="Install a package that ships an agent, or declare one of your own." :background="0"></e-admin-status-empty>
                 <div ot-if="agents && agents.length" class="grid">
-                    <e-cards-item
+                    <e-admin-cards-item
                         ot-for="agent in agents"
                         :ot-key="agent.id"
                         icon="smart_toy"
@@ -59,9 +59,9 @@ onetype.AddonReady('elements', (elements) =>
                         :_click="open(agent)"
                     >
                         <div slot="bottom">
-                            <e-global-tags ot-if="agent.tools.length" :items="agent.tools" :background="2"></e-global-tags>
+                            <e-admin-global-tags ot-if="agent.tools.length" :items="agent.tools" :background="2"></e-admin-global-tags>
                         </div>
-                    </e-cards-item>
+                    </e-admin-cards-item>
                 </div>
             `;
         }

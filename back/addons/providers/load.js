@@ -1,7 +1,7 @@
 import '#agents/addons/providers/addon.js';
+import '#agents/addons/providers/items/onetype-schemas/agents.provider.js';
 
 /* Core */
-import '#agents/addons/providers/_/schemas/provider.js';
 
 /* Functions */
 import '#agents/addons/providers/functions/key.js';

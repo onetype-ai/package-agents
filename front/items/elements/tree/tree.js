@@ -69,9 +69,9 @@ onetype.AddonReady('elements', (elements) =>
             };
 
             return /* html */ `
-                <e-status-loading ot-if="!agents" :background="0"></e-status-loading>
-                <e-status-empty ot-if="agents && !agents.length" icon="hub" title="No agents yet" description="Install a package that ships an agent, or declare one of your own." :background="0"></e-status-empty>
-                <e-views-tree ot-if="agents && agents.length" :items="nodes()" placeholder="Search agents and tools..." :background="1" :_open="open()"></e-views-tree>
+                <e-admin-status-loading ot-if="!agents" :background="0"></e-admin-status-loading>
+                <e-admin-status-empty ot-if="agents && !agents.length" icon="hub" title="No agents yet" description="Install a package that ships an agent, or declare one of your own." :background="0"></e-admin-status-empty>
+                <e-admin-views-tree ot-if="agents && agents.length" :items="nodes()" placeholder="Search agents and tools..." :background="1" :_open="open()"></e-admin-views-tree>
             `;
         }
     });

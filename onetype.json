@@ -1,13 +1,12 @@
 {
 	"slug": "onetype/agents",
 	"name": "Agents",
-	"description": "The agentic engine of the instance. Agents, tools and runs — packages declare what their agents can do, consumers hand them research questions and tasks, every run is recorded step by step.",
+	"description": "The agentic engine of the instance. Agents, tools and runs \u2014 packages declare what their agents can do, consumers hand them research questions and tasks, every run is recorded step by step.",
 	"icon": "hub",
 	"color": "rgba(56, 189, 248, 1)",
 	"status": "disabled",
 	"depends": [
 		"onetype/vault",
-		"onetype/elements",
 		"onetype/admin"
 	],
 	"runtimes": [

@@ -1,5 +1,6 @@
-onetype.EmitRegister('agents.runs.step', {
-    description: 'Fires after every tool call inside a run, with the step that was added.',
+onetype.emitters.ItemAdd({
+    id: 'agents.runs.start',
+    description: 'Fires when a run begins working.',
     metadata: { addon: 'agents.runs' },
     config: {
         id: {
@@ -9,10 +10,6 @@ onetype.EmitRegister('agents.runs.step', {
         agent: {
             type: 'string',
             description: 'Agent the run belongs to.'
-        },
-        step: {
-            type: 'object',
-            description: 'The step that was added.'
         }
     }
 });

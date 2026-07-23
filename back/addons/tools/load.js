@@ -1,7 +1,7 @@
 import '#agents/addons/tools/addon.js';
+import '#agents/addons/tools/items/onetype-schemas/agents.tool.js';
 
 /* Core */
-import '#agents/addons/tools/_/schemas/tool.js';
 
 /* Functions */
 import '#agents/addons/tools/functions/name.js';

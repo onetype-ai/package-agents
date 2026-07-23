@@ -1,7 +1,7 @@
-onetype.AddonReady('ui.layouts', (layouts) =>
+onetype.AddonReady('admin.layouts', (layouts) =>
 {
     layouts.Item({
-        id: 'agents-grid',
+        id: 'agents.agents',
         isActive: true,
         screen: ['agents'],
         zone: 'root',
@@ -13,7 +13,7 @@ onetype.AddonReady('ui.layouts', (layouts) =>
                 $ot.page('/agents/' + value.id);
             };
 
-            return /* html */ `
+            return `
                 <div class="ot-container-full ot-py-l ot-dots ot-fill">
                     <e-agents-graph :_open="jump()"></e-agents-graph>
                 </div>

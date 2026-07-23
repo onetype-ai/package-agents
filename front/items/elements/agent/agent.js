@@ -97,7 +97,7 @@ elements.ItemAdd({
 
         return /* html */ `
             <div ot-if="agent" class="box">
-                <e-global-header
+                <e-admin-global-header
                     icon="smart_toy"
                     :accent="agent.persona && agent.persona.color ? agent.persona.color : 'brand'"
                     eyebrow="Agent"
@@ -109,53 +109,53 @@ elements.ItemAdd({
                     pattern="dots"
                 >
                     <div slot="top">
-                        <e-navigation-breadcrumbs :items="crumbs()"></e-navigation-breadcrumbs>
+                        <e-admin-navigation-breadcrumbs :items="crumbs()"></e-admin-navigation-breadcrumbs>
                     </div>
                     <div slot="bottom" class="ot-flex-vertical ot-gap-s">
-                        <e-global-tags ot-if="tools.length" :items="chips()" :background="3"></e-global-tags>
+                        <e-admin-global-tags ot-if="tools.length" :items="chips()" :background="3"></e-admin-global-tags>
                     </div>
-                </e-global-header>
+                </e-admin-global-header>
 
                 <div class="columns ot-container-m ot-py-l">
                     <aside class="side">
-                        <e-views-sidebar :items="sections()" :active="section" :_select="jump"></e-views-sidebar>
+                        <e-admin-views-sidebar :items="sections()" :active="section" :_select="jump"></e-admin-views-sidebar>
                     </aside>
 
                     <div class="content">
                         <div class="block" data-section="overview">
-                            <e-global-heading title="Overview" description="Who this agent is and what it exists for." element="h3" :border="true"></e-global-heading>
-                            <e-global-markdown :content="agent.description" :background="0"></e-global-markdown>
-                            <e-data-details :items="details()" :background="1"></e-data-details>
+                            <e-admin-global-heading title="Overview" description="Who this agent is and what it exists for." element="h3" :border="true"></e-admin-global-heading>
+                            <e-admin-global-markdown :content="agent.description" :background="0"></e-admin-global-markdown>
+                            <e-admin-data-details :items="details()" :background="1"></e-admin-data-details>
                         </div>
 
                         <div class="block" data-section="instructions">
-                            <e-global-heading title="Instructions" description="The system instructions the agent runs with." element="h3" :border="true"></e-global-heading>
-                            <e-global-markdown ot-if="agent.instructions" :content="agent.instructions" :background="1"></e-global-markdown>
-                            <e-status-empty ot-if="!agent.instructions" icon="menu_book" title="No instructions" description="This agent runs without custom instructions."></e-status-empty>
+                            <e-admin-global-heading title="Instructions" description="The system instructions the agent runs with." element="h3" :border="true"></e-admin-global-heading>
+                            <e-admin-global-markdown ot-if="agent.instructions" :content="agent.instructions" :background="1"></e-admin-global-markdown>
+                            <e-admin-status-empty ot-if="!agent.instructions" icon="menu_book" title="No instructions" description="This agent runs without custom instructions."></e-admin-status-empty>
                         </div>
 
                         <div class="block" data-section="tools">
-                            <e-global-heading title="Tools" description="What this agent may run on its own." element="h3" :border="true"></e-global-heading>
-                            <e-status-empty ot-if="!tools.length" icon="construction" title="No own tools" description="This agent only carries the global tools every agent receives."></e-status-empty>
+                            <e-admin-global-heading title="Tools" description="What this agent may run on its own." element="h3" :border="true"></e-admin-global-heading>
+                            <e-admin-status-empty ot-if="!tools.length" icon="construction" title="No own tools" description="This agent only carries the global tools every agent receives."></e-admin-status-empty>
                             <div class="ot-flex-vertical ot-gap-s">
                                 <div ot-for="tool in tools" :ot-key="tool.id">
-                                    <e-core-section :title="tool.name ? tool.name : tool.id" :description="tool.description" icon="construction" :collapsible="true" :collapsed="true">
+                                    <e-admin-core-section :title="tool.name ? tool.name : tool.id" :description="tool.description" icon="construction" :collapsible="true" :collapsed="true">
                                         <div slot="content" class="ot-flex-vertical ot-gap-m">
                                             <div ot-if="parameters(tool.input).length" class="ot-flex-vertical ot-gap-s">
-                                                <e-global-heading title="Input" element="h3"></e-global-heading>
-                                                <e-global-parameters :items="parameters(tool.input)" :background="2"></e-global-parameters>
+                                                <e-admin-global-heading title="Input" element="h3"></e-admin-global-heading>
+                                                <e-admin-global-parameters :items="parameters(tool.input)" :background="2"></e-admin-global-parameters>
                                             </div>
                                             <p ot-if="!parameters(tool.input).length" class="quiet">The tool runs without parameters.</p>
                                         </div>
-                                    </e-core-section>
+                                    </e-admin-core-section>
                                 </div>
                             </div>
                         </div>
 
                         <div class="block" data-section="team">
-                            <e-global-heading title="Team" description="Child agents only this one sees and delegates to." element="h3" :border="true"></e-global-heading>
-                            <e-views-list ot-if="team.length" :items="teamRows()" :background="1"></e-views-list>
-                            <e-status-empty ot-if="!team.length" icon="group" title="No team" description="This agent works alone."></e-status-empty>
+                            <e-admin-global-heading title="Team" description="Child agents only this one sees and delegates to." element="h3" :border="true"></e-admin-global-heading>
+                            <e-admin-views-list ot-if="team.length" :items="teamRows()" :background="1"></e-admin-views-list>
+                            <e-admin-status-empty ot-if="!team.length" icon="group" title="No team" description="This agent works alone."></e-admin-status-empty>
                         </div>
                     </div>
                 </div>

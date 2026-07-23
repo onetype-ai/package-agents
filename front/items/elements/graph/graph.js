@@ -71,9 +71,9 @@ onetype.AddonReady('elements', (elements) =>
             };
 
             return /* html */ `
-                <e-status-loading ot-if="!agents" :background="0"></e-status-loading>
-                <e-status-empty ot-if="agents && !agents.length" icon="hub" title="No agents yet" description="Install a package that ships an agent, or declare one of your own." :background="0"></e-status-empty>
-                <e-views-graph ot-if="agents && agents.length" :items="nodes()" :background="0" :_open="open()"></e-views-graph>
+                <e-admin-status-loading ot-if="!agents" :background="0"></e-admin-status-loading>
+                <e-admin-status-empty ot-if="agents && !agents.length" icon="hub" title="No agents yet" description="Install a package that ships an agent, or declare one of your own." :background="0"></e-admin-status-empty>
+                <e-admin-views-graph ot-if="agents && agents.length" :items="nodes()" :background="0" :_open="open()"></e-admin-views-graph>
             `;
         }
     });

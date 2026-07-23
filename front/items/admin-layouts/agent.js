@@ -1,14 +1,14 @@
-onetype.AddonReady('ui.layouts', (layouts) =>
+onetype.AddonReady('admin.layouts', (layouts) =>
 {
     layouts.Item({
-        id: 'agents-agent',
+        id: 'agents.agent',
         isActive: true,
         screen: ['agents.agent'],
         zone: 'root',
         slot: 'center',
         render: function()
         {
-            return `<e-agents-agent :id="agentId"></e-agents-agent>`;
+            return '<e-agents-agent :id="agentId"></e-agents-agent>';
         }
     });
 });

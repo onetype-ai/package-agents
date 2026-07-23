@@ -1,4 +1,5 @@
-onetype.EmitRegister('agents.requests.add', {
+onetype.emitters.ItemAdd({
+    id: 'agents.requests.add',
     description: 'Fires after every model request is recorded, done or failed.',
     metadata: { addon: 'agents.requests' },
     config: {

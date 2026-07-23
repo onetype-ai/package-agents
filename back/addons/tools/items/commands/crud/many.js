@@ -1,4 +1,4 @@
-import commands from '@onetype/framework/commands';
+import commands from 'addon-commands';
 import agents from '#agents/addon.js';
 
 commands.Item({

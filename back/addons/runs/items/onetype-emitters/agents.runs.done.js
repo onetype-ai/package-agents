@@ -1,4 +1,5 @@
-onetype.EmitRegister('agents.runs.done', {
+onetype.emitters.ItemAdd({
+    id: 'agents.runs.done',
     description: 'Fires when a run finishes, done or failed.',
     metadata: { addon: 'agents.runs' },
     config: {

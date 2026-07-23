@@ -13,6 +13,11 @@ const register = (item) =>
 {
     const id = item.Get('id');
 
+    if(agents.tools.ItemGet('agent:' + id))
+    {
+        return;
+    }
+
     agents.tools.Item({
         id: 'agent:' + id,
         name: item.Get('name'),

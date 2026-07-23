@@ -27,7 +27,7 @@ agents.requests.Fn('record', async function({ provider, model, caller, run, inpu
 
     this.ItemRemove(item.Get('id'), false);
 
-    onetype.Emit('agents.requests.add', {
+    onetype.emitters.fire('agents.requests.add', {
         id: item.Get('id'),
         provider: provider.Get('id'),
         model,

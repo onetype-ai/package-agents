@@ -1,7 +1,7 @@
 import agents from '#agents/addon.js';
+import '#agents/items/onetype-schemas/agents.agent.js';
 
 /* Core */
-import '#agents/_/schemas/agent.js';
 
 /* Addons */
 import '#agents/addons/providers/load.js';
